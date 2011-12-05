@@ -1,0 +1,18 @@
+--- ricci-0.16.2/ccs_sync/ricci_conf.c.bz	2010-05-18 15:20:03.628347321 -0500
++++ ricci-0.16.2/ccs_sync/ricci_conf.c	2010-05-18 15:20:09.933408949 -0500
+@@ -195,13 +195,9 @@ int main(int argc, const char const * co
+ 			}
+ 
+ 			if (!hash_exists(&node_hash, cur_node)) {
+-				fprintf(stderr, "Warning: %s is not listed as a node in %s\n",
++				fprintf(stderr, "Error: %s is not listed as a node in %s\n",
+ 					cur_node, conf_path);
+-
+-				if (strict) {
+-					fprintf(stderr, "Aborting.\n");
+-					exit(1);
+-				}
++				exit(1);
+ 			}
+ 			if (!hash_exists(&cmdline_nodes, cur_node)) {
+ 				hash_add(&cmdline_nodes, cur_node, cur_node);

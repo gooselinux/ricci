@@ -1,0 +1,21 @@
+--- ricci-0.16.2/init.d/ricci.bz585126	2010-06-03 13:34:04.090249767 -0500
++++ ricci-0.16.2/init.d/ricci	2010-06-03 13:34:45.810188285 -0500
+@@ -189,7 +189,7 @@ case $1 in
+ 		fi
+ 	;;
+ 
+-	restart)
++	restart|force-reload)
+ 		$0 stop
+ 		$0 start
+ 		ret=$?
+@@ -198,9 +198,6 @@ case $1 in
+ 	status)
+ 		ricci_status
+ 		ret=$?
+-		if [ $ret -eq 3 ] ; then
+-			ret=2
+-		fi
+ 	;;
+ 
+ 	stop)

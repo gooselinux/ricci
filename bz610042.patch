@@ -1,0 +1,60 @@
+--- ricci-0.16.2/man/Makefile.bz610042	2010-07-07 14:28:27.383699152 -0500
++++ ricci-0.16.2/man/Makefile	2010-07-07 14:28:27.383699152 -0500
+@@ -0,0 +1,17 @@
++###############################################################################
++###############################################################################
++##
++##  Copyright (C) 2010 Red Hat, Inc.  All rights reserved.
++##
++##  This copyrighted material is made available to anyone wishing to use,
++##  modify, copy, or redistribute it subject to the terms and conditions
++##  of the GNU General Public License v.2.
++##
++###############################################################################
++###############################################################################
++
++include ../make/defines.mk
++
++install:
++	install -d ${mandir}/man8
++	install ccs_sync.8 ${mandir}/man8
+--- ricci-0.16.2/man/ccs_sync.8.bz610042	2010-07-07 14:28:27.383699152 -0500
++++ ricci-0.16.2/man/ccs_sync.8	2010-07-07 14:28:27.383699152 -0500
+@@ -0,0 +1,27 @@
++.TH "ccs_sync" "8" "July 2010" "" ""
++.SH "NAME"
++ccs_sync \- Cluster Synchronization Utility
++.SH "SYNOPSIS"
++\fBccs_sync\fP [options] [<host0> [... <hostN>]]
++.SH "DESCRIPTION"
++.PP
++\fBccs_sync\fP is used to synchronize the cluster configuration file
++to one or more machines in a cluster.
++.SH "OPTIONS"
++.IP "-f <cluster_conf>"
++Specify the path of the cluster.conf file to propagate.
++.IP "-c <NSS certificate DB>"
++Specify the path to the cacert.pem file.
++.IP -i
++Increment the version in the configuration file before propagating.
++.IP -h
++Display a usage message.
++.IP "-p <port number>"
++Connect to ricci on the specified port
++.IP -w
++Exit with failure status if any warnings are issued
++.SH "WARNING"
++It is recommended that 'cman_tool version -r <x>' be used instead of
++\fBccs_sync\fP
++.SH "SEE ALSO"
++cman_tool(8)
+--- ricci-0.16.2/Makefile.bz610042	2010-07-07 14:29:15.266699308 -0500
++++ ricci-0.16.2/Makefile	2010-07-07 14:31:00.757699853 -0500
+@@ -39,6 +39,7 @@ install_ricci:
+ 	${INSTALL_DIR} ${docdir}/ricci-${VERSION}/
+ 	${MAKE} -C docs install
+ 	${INSTALL_FILE} COPYING ${docdir}/ricci-${VERSION}/
++	${MAKE} -C man install
+ 
+ install_clustermon:
+ 	${MAKE} -C modules install_clustermon

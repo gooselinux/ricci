@@ -1,0 +1,39 @@
+--- ricci-0.16.2/init.d/ricci.bz	2010-05-18 14:14:00.306409190 -0500
++++ ricci-0.16.2/init.d/ricci	2010-05-18 14:54:44.345347347 -0500
+@@ -198,6 +198,9 @@ case $1 in
+ 	status)
+ 		ricci_status
+ 		ret=$?
++		if [ $ret -eq 3 ] ; then
++			ret=2
++		fi
+ 	;;
+ 
+ 	stop)
+@@ -212,24 +215,20 @@ case $1 in
+ 		echo
+ 	;;
+ 
+-	condrestart)
++	condrestart|try-restart)
+ 		if [ -f "$PIDFILE" ]; then
+ 			$0 restart
+ 			ret=$?
+ 		fi
+ 	;;
+ 
+-	try-restart)
+-		ret=3
+-	;;
+-
+ 	reload)
+ 		ret=3
+ 	;;
+ 
+ 	*)
+ 		echo "Usage: $0 {start|stop|status|restart|condrestart|reload}"
+-		ret=3
++		ret=2
+ 	;;
+ esac
+ 

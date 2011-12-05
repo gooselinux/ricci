@@ -1,0 +1,42 @@
+--- ricci-0.16.2/modules/rpm/PackageHandler.cpp.packfix	2010-01-15 00:32:04.000000000 -0600
++++ ricci-0.16.2/modules/rpm/PackageHandler.cpp	2010-07-22 16:12:39.481534522 -0500
+@@ -370,7 +370,6 @@ PackageHandler::build_cluster_storage_se
+ 	set.packages.push_back("lvm2-cluster");
+ 	set.packages.push_back("sg3_utils");
+ 	set.packages.push_back("gfs2-utils");
+-	set.packages.push_back("gfs-utils");
+ 
+ 	return set;
+ }
+--- ricci-0.16.2/modules/service/ServiceManager.cpp.packfix	2010-01-15 00:32:04.000000000 -0600
++++ ricci-0.16.2/modules/service/ServiceManager.cpp	2010-07-22 16:12:39.482534834 -0500
+@@ -490,7 +490,6 @@ ServiceManager::generate_sets()
+ 	descr = "Shared Storage: clvmd, gfs2";
+ 	servs.push_back("clvmd");
+ 	servs.push_back("gfs2");
+-	servs.push_back("scsi_reserve");
+ 
+ 	s = ServiceSet(name, descr);
+ 	if (populate_set(s, servs))
+--- ricci-0.16.2/modules/cluster/ClusterStatus.cpp.packfix	2010-01-15 00:32:04.000000000 -0600
++++ ricci-0.16.2/modules/cluster/ClusterStatus.cpp	2010-07-22 16:12:39.482534834 -0500
+@@ -34,7 +34,7 @@ using namespace std;
+ 
+ #define INITD_DIR_PATH			"/etc/init.d/"
+ #define CHKCONFIG_PATH			"/sbin/chkconfig"
+-#define LVMCONF_PATH			"/usr/sbin/lvmconf"
++#define LVMCONF_PATH			"/sbin/lvmconf"
+ 
+ #define CMAN_LEAVE_TIMEOUT		"120"	// seconds (string)
+ #define CLUMON_SYNC_TIME		8		// seconds
+--- ricci-0.16.2/modules/storage/LVM.cpp.packfix	2010-01-15 00:32:04.000000000 -0600
++++ ricci-0.16.2/modules/storage/LVM.cpp	2010-07-22 16:13:41.960264459 -0500
+@@ -85,7 +85,7 @@ cluster_quorate();
+ 
+ 
+ 
+-static String LVMCONF_PATH("/usr/sbin/lvmconf");
++static String LVMCONF_PATH("/sbin/lvmconf");
+ 
+ 
+ // pvs
